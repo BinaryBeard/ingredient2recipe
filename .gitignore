@@ -2,3 +2,4 @@ config.json
 assignment.pdf
 __pycache__
 .pytest*
+.coverage

@@ -1,7 +1,11 @@
 init:
-	  pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 test:
-	  pytest
+	python -m pytest -vv tests/
 
-.PHONY: init test
+coverage:
+	coverage run --source src -m py.test
+	coverage report --show-missing
+
+.PHONY: init test coverage
