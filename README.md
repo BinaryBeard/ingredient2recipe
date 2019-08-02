@@ -29,7 +29,7 @@ optional arguments:
 	# Clone this repo
 	git clone git@github.com:binarybeard/ingredient2recipe.git
 	
-	# Run make to install all the dependicies
+	# Run make to install all the dependencies
 	make
 	```
 
@@ -37,7 +37,7 @@ optional arguments:
 4. Run the program:
 
 	```shell
-	# Example (reaplce KEY with your API Key)
+	# Example (replace KEY with your API Key)
 	src/main.py --key KEY fish chicken
 	
 	# Get some verbosity
@@ -49,7 +49,7 @@ optional arguments:
 	
 ## Configuration File
 
-To avoid using the `--key KEY` flag on the command line, put the API Key in `REPO_ROOT/config.json` file (REPO_ROOT is the root level of the cloned directroy). 
+To avoid using the `--key KEY` flag on the command line, put the API Key in `REPO_ROOT/config.json` file (REPO_ROOT is the root level of the cloned directory). 
 
 ```json
 {
@@ -59,7 +59,7 @@ To avoid using the `--key KEY` flag on the command line, put the API Key in `REP
 
 ## Known Issues
 
-As python is not my primary langague, there may be a lot of issues with the structure of the code. I ran into a few things when it came to building the tests...
+As python is not my primary language, there may be a lot of issues with the structure of the code. I ran into a few things when it came to building the tests...
 
 ### Ingredients names that are more than one word
 
