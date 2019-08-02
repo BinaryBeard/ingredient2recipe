@@ -6,7 +6,7 @@ So you have a bunch of ingredients and don't know what to make? Sweet. Just fire
 ## Usage
 
 ```
-usage: main.py [-h] [-k KEY] [-d] [-v] INGREDIENT [INGREDIENT ...]
+usage: src/main.py [-h] [-k KEY] [-d] [-v] INGREDIENT [INGREDIENT ...]
 
 Find a great recipe
 
@@ -38,13 +38,13 @@ optional arguments:
 
 	```shell
 	# Example (reaplce KEY with your API Key)
-	python src/main.py --key KEY fish chicken
+	src/main.py --key KEY fish chicken
 	
 	# Get some verbosity
-	python src/main.py --key KEY fish chicken --verbose
+	src/main.py --key KEY fish chicken --verbose
 	
 	# Use the mock json files (don't make API Calls)
-	python src/main.py fish chicken --dev
+	src/main.py fish chicken --dev
 	```
 	
 ## Configuration File
@@ -53,7 +53,7 @@ To avoid using the `--key KEY` flag on the command line, put the API Key in `REP
 
 ```json
 {
-	"api_key": "YOUR_API_KEY"
+    "api_key": "YOUR_API_KEY"
 }
 ```
 
@@ -66,7 +66,7 @@ As python is not my primary langague, there may be a lot of issues with the stru
 **Example**
 
 ```
-python src/main.py fish sauce
+src/main.py fish sauce
 ```
 
 **Expected**
@@ -91,7 +91,7 @@ Easy, 30 minutes
 **Example**
 
 ```
-python src/main.py cat
+src/main.py cat
 ```
 
 **Fix**
@@ -107,12 +107,12 @@ Easy, 2 hours
 **Example**
 
 ```
-python src/main.py fish chicken
+src/main.py fish chicken
 ```
 
 **Fix**
 
-We would need a better way to qualify ingredients. Chicken is very generic and isn't used in many recipes. Typically recipes call for chicken breast, or chicken thighs, etc. We need a better way to qualify the type of chicken [read: and other generic ingredients] the user is inputting. There would be a robust infrastructure of regular expressions to handle most of this logic.
+We would need a better way to qualify ingredients. Typically recipes call for chicken breast, or chicken thighs, etc. Chicken is very generic and isn't used in many recipes. We need a better way to qualify the type of chicken [read: and other generic ingredients] the user is inputting. There would be a robust infrastructure of regular expressions to handle most of this logic.
 
 **Estimation**
 
