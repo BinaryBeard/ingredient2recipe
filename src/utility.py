@@ -11,9 +11,12 @@ def inform(msg):
 
 # Just a simple abstraction of reading a file
 def get_json_file(file_path):
-    with open(file_path) as raw_data:
-        json_data = json.load(raw_data)
-        return json_data
+    try:
+        with open(file_path) as raw_data:
+            json_data = json.load(raw_data)
+            return json_data
+    except:
+        return {}
 
 # Just a simple abstraction of a restful GET
 def get_json_url(url):

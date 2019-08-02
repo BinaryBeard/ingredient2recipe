@@ -18,7 +18,10 @@ def debug(msg):
 # Actual Start of main
 
 # If we have a local configuration file, use it (just for the API Key)
-config_key = get_json_file('./config.json')['api_key']
+try:
+    config_key = get_json_file('./config.json')['api_key']
+except:
+    config_key = ''
 
 # Nice library to create some command line parsing
 parser = build_parser(config_key)
@@ -45,7 +48,7 @@ else:
 # Verify content and move on
 if 'error' in search_json:
     handle_error(search_json['error'])
-    debug(recipe_json)
+    debug(search_json)
 elif search_json['count'] > 0:
     if search_json['count'] > 10:
         inform('I found a ton of recipes that you can create!\n')
