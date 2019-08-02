@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 from utility import get_json_file, get_json_url, inform, handle_error, join_ingredients, build_parser
 from recipe import Recipe
