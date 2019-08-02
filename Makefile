@@ -1,5 +1,6 @@
 init:
 	pip3 install -r requirements.txt
+	chmod +x src/main.py
 
 help:
 	@echo "Please use 'make <target>' where <target> is one of"
