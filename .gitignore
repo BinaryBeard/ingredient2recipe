@@ -3,3 +3,4 @@ assignment.pdf
 __pycache__
 .pytest*
 .coverage
+htmlcov

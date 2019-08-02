@@ -1,0 +1,8 @@
+[run]
+omit = /usr/*
+source = ./src
+branch = True
+parallel = True
+
+[report]
+show_missing = True
