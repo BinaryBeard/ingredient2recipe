@@ -36,7 +36,7 @@ def join_ingredients(ing_list):
 
 # Just building the parser out of main so we can test
 def build_parser(config_key):
-    parser = argparse.ArgumentParser(description='Find a great recipe')
+    parser = argparse.ArgumentParser(description='Find a great recipe', prog='src/main.py')
     parser.add_argument('ingredients', metavar='INGREDIENT', nargs='+', help='Space delimited list of ingredients')
     parser.add_argument('-k', '--key', metavar='KEY', help='API key for food2fork', default=config_key)
     parser.add_argument('-d', '--dev', help='run in developer mode', action='store_true')
