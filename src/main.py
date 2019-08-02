@@ -1,5 +1,5 @@
 import argparse
-from utility import get_json_file, get_json_url, inform
+from utility import get_json_file, get_json_url, inform, handle_error, join_ingredients, build_parser
 from recipe import Recipe
 from colorama import Fore, Back, Style, init
 
@@ -13,29 +13,13 @@ def debug(msg):
     if verbose_output:
         print('{}debug:{} {}'.format(Style.BRIGHT, Style.RESET_ALL, msg))
 
-# Pretty generic error handling
-def handle_error(err_msg):
-    err_msg = search_json['error']
-    if err_msg == 'limit':
-        inform('Well, dangit!\n\nIt looks like your API Key has reached its limit for the day...\n\nYou should probably fix that!')
-    elif err_msg == 'fatal':
-        inform('I ran into some kind of fatal error...')
-        print('{}{}'.format(Fore.RED, search_json['raw']))
-    else:
-        inform('I ran into some kind of fatal error...')
-        print('{}{}'.format(Fore.RED, err_msg))
-
 # Actual Start of main
 
 # If we have a local configuration file, use it (just for the API Key)
 config_key = get_json_file('./config.json')['api_key']
 
 # Nice library to create some command line parsing
-parser = argparse.ArgumentParser(description='Find a great recipe')
-parser.add_argument('ingredients', metavar='INGREDIENT', nargs='+', help='Space delimited list of ingredients')
-parser.add_argument('-k', '--key', metavar='KEY', help='API key for food2fork', default=config_key)
-parser.add_argument('-d', '--dev', help='run in developer mode', action='store_true')
-parser.add_argument('-v', '--verbose', help='run in verbose mode', action='store_true')
+parser = build_parser(config_key)
 args = parser.parse_args()
 verbose_output = args.verbose
 
@@ -44,12 +28,8 @@ if config_key == args.key:
 else:
     debug('Not Using API Key from config.json')
 
-inform('\nHello!\n\nI am looking for a recipe with the following ingredients:')
-
-cs_ingredients = ','.join(args.ingredients)
-
-inform('  {}'.format(cs_ingredients))
-inform('\n... hopefully I can find something yummy!\n')
+cs_ingredients = join_ingredients(args.ingredients)
+inform('\nHello!\n\nI am looking for a recipe with the following ingredients:\n  {}\n\n... hopefully I can find something yummy!\n'.format(cs_ingredients))
 
 search_url = 'https://www.food2fork.com/api/search?key={}&q={}&sort=r'.format(args.key, cs_ingredients)
 debug('GET {}'.format(search_url))
@@ -63,12 +43,13 @@ else:
 # Verify content and move on
 if 'error' in search_json:
     handle_error(search_json['error'])
+    debug(recipe_json)
 elif search_json['count'] > 0:
     if search_json['count'] > 10:
         inform('I found a ton of recipes that you can create!\n')
     elif search_json['count'] > 1:
         inform('I found a few recipes that you can create!\n')
-    elif search_json['count'] == 1:
+    else:
         inform('I found a single recipe that you can create!\n')
 
     inform('Generating the ingredient list now.\nI will highlight the ingredients you own...\n')
@@ -85,6 +66,7 @@ elif search_json['count'] > 0:
 
     if 'error' in recipe_json:
         handle_error(recipe_json['error'])
+        debug(recipe_json)
     else:
         # Populate the model and run the printing function
         new_recipe = Recipe(recipe_json)
